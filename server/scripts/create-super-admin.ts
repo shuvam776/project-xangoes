@@ -6,7 +6,6 @@
  * The email must already have a Firebase account (sign in once first); the Firebase uid
  * is looked up with the Admin SDK. Requires DATABASE_URL and FIREBASE_* in server/.env.
  */
-import { pool } from '../src/db/schema';
 import { adminService } from '../src/services/admin.service';
 
 async function main() {
@@ -34,4 +33,4 @@ main()
         console.error('Failed to create super admin:', error?.message ?? error);
         process.exitCode = 1;
     })
-    .finally(() => pool.end());
+    .finally(() => process.exit());
