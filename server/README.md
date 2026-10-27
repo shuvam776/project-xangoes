@@ -248,9 +248,7 @@ All endpoints below need `Authorization: Bearer <Firebase ID token>`.
 | `GET` | `/admins/me` | Active admins (deleted admins get 403 `ADMIN_REMOVED`) |
 | `GET` `POST` | `/admins` | Super admin. `POST` takes `email`, `festID`, `isSuperAdmin`, `allowedToModifyContent`; the Firebase uid is looked up by email |
 | `GET` `PATCH` `DELETE` | `/admins/:id` | Super admin (`DELETE` is a soft delete) |
-| `GET` | `/fests/:festId/access` | Any admin: what they may do in that fest |
 | `GET` | `/fests/:festId/admins` | Admin of that fest, or a super admin |
-| `POST` / `GET` | `/storage/upload-url`, `/storage/url/*` | Participant |
 
 Auth failures use `error.code`: `AUTH_REQUIRED`, `TOKEN_MALFORMED`, `TOKEN_INVALID`, `TOKEN_EXPIRED`, `TOKEN_REVOKED`, `USER_DISABLED` (401); `USER_NOT_PROVISIONED`, `ADMIN_REQUIRED`, `ADMIN_REMOVED`, `SUPER_ADMIN_REQUIRED`, `FEST_SCOPE_FORBIDDEN`, `CONTENT_EDIT_FORBIDDEN`, `NOT_OWNER` (403); `AUTH_NOT_CONFIGURED` (503).
 

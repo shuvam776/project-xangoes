@@ -1,12 +1,9 @@
 import { Hono } from 'hono';
 import { storageController } from '@/controllers/storage';
-import { asyncHandler, authenticate, requireParticipant, validateRequest } from '@/middlewares';
+import { asyncHandler, validateRequest } from '@/middlewares';
 import { signedUploadUrlSchema } from '@/middlewares/validators/storage';
 
 const storageRouter = new Hono();
-
-// Uploads and file lookups require a signed-in participant
-storageRouter.use('*', authenticate, requireParticipant);
 
 // POST /storage/upload-url - Generate signed upload URL
 storageRouter.post(

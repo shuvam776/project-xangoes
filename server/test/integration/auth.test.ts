@@ -216,14 +216,4 @@ describe('/admins and /fests', () => {
         expect(res.status).toBe(403);
         expect(((await res.json()) as any).error.code).toBe('FEST_SCOPE_FORBIDDEN');
     });
-
-    it('GET /fests/:festId/access reports content-edit permission', async () => {
-        signIn(user(), admin({ allowedToModifyContent: true }));
-        const res = await call('/fests/fest-1/access');
-        expect(((await res.json()) as any).data).toMatchObject({ canAccess: true, canEditContent: true });
-
-        signIn(user(), admin());
-        const res2 = await call('/fests/fest-1/access');
-        expect(((await res2.json()) as any).data).toMatchObject({ canAccess: true, canEditContent: false });
-    });
 });

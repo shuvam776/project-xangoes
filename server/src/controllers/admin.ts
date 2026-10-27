@@ -4,7 +4,7 @@ import type { Admin } from '@/db/schema';
 import { createError, getAuth, getParam, sendCreated, sendNoContent, sendSuccess } from '@/middlewares';
 import { createAdminSchema, updateAdminSchema } from '@/middlewares/validators/admin';
 import { adminService } from '@/services/admin.service';
-import { canAccessFest, requireAdmin, requireContentEditor } from '@/services/authorization';
+import { requireAdmin } from '@/services/authorization';
 
 /** Admin context exposed to clients; null when the identity has no active admin record. */
 export function toAdminContext(admin: Admin | null) {
@@ -68,19 +68,5 @@ export const adminController = {
     listByFest: async (c: Context) => {
         const admins = await adminService.list({ festID: getParam(c, 'festId') });
         return sendSuccess(c, { admins });
-    },
-
-    /** Reports what the caller may do within a fest, for client-side UX gating. */
-    getFestAccess: async (c: Context) => {
-        const auth = getAuth(c);
-        const festId = getParam(c, 'festId');
-
-        let canEditContent = true;
-        try {
-            requireContentEditor(auth, festId);
-        } catch {
-            canEditContent = false;
-        }
-        return sendSuccess(c, { festId, canAccess: canAccessFest(auth, festId), canEditContent });
     },
 };
