@@ -1,5 +1,6 @@
 // Export all tables
 export * from "./user";
+export * from "./admin";
 export * from "./fest";
 export * from "./club";
 export * from "./event";

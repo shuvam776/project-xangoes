@@ -20,7 +20,7 @@ export const users = pgTable("users", {
     city: varchar("city", { length: 100 }), // lowercase
     college: varchar("college", { length: 255 }), // References institute.id
     idCard: text("id_card"), // photo url id uploaded from frontend via cloudinary uploader
-    mobile: varchar("mobile", { length: 20 }).notNull().unique(),
+    mobile: varchar("mobile", { length: 20 }).unique(), // collected during profile completion
     festID: text("fest_id"),
     rollNumber: varchar("roll_number", { length: 50 }),
     firebaseId: varchar("firebase_id", { length: 255 }).notNull().unique(), // Firebase auth ID

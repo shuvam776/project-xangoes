@@ -32,3 +32,6 @@ export const checkDbConnection = async (): Promise<{ isHealthy: boolean; latency
         return { isHealthy: false, latencyMs, error: err?.message || 'Database connection error' };
     }
 };
+
+// Re-export tables and types so consumers can import everything from "@/db/schema"
+export * from "./schema/index";
